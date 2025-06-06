@@ -22,6 +22,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.commonmark.parser.Parser;
+import org.commonmark.renderer.html.HtmlRenderer;
+
 @Service
 public class TogetherAIService {
 
@@ -38,8 +41,6 @@ public class TogetherAIService {
         this.httpClient = createHttpClientWithDisabledSSL();
         this.objectMapper = new ObjectMapper();
     }
-
-
 
     public String getAIResponse(String userInput) {
         try {
@@ -79,8 +80,10 @@ public class TogetherAIService {
             Map<?, ?> message = (Map<?, ?>) ((Map<?, ?>) choices.get(0)).get("message");
             String content = (String) message.get("content");
 
-            // Format the content for better readability
-            return content.replace("\\n", "\n").replace("\\t", "    ");
+            // Convert Markdown to HTML
+            Parser parser = Parser.builder().build();
+            HtmlRenderer renderer = HtmlRenderer.builder().build();
+            return renderer.render(parser.parse(content));
 
         } catch (Exception e) {
             return "Error contacting Together AI: " + e.getMessage();

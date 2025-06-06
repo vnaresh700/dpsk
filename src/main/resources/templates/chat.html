@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <style>
         body {
-            font-family: Arial, sans-serif;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             margin: 0;
             padding: 0;
             display: flex;
@@ -13,18 +13,19 @@
             align-items: center;
             justify-content: flex-start;
             min-height: 100vh;
-            background-color: #f4f4f9;
+            background-color: #eef2f7;
         }
 
         h1 {
-            color: #333;
-            margin: 20px 0 10px; /* Add spacing below the heading */
+            color: #2c3e50;
+            margin: 20px 0 10px;
+            font-size: 2rem;
         }
 
         label {
             font-size: 1rem;
-            color: #555;
-            margin-bottom: 10px; /* Add spacing below the label */
+            color: #34495e;
+            margin-bottom: 10px;
         }
 
         form {
@@ -37,57 +38,77 @@
 
         input[type="text"] {
             flex: 1;
-            padding: 10px;
+            padding: 12px;
             font-size: 1rem;
-            border: 1px solid #ccc;
+            border: 1px solid #bdc3c7;
             border-radius: 5px;
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            transition: border-color 0.3s ease;
+        }
+
+        input[type="text"]:focus {
+            border-color: #3498db;
+            outline: none;
         }
 
         button {
-            padding: 10px 15px;
+            padding: 12px 20px;
             font-size: 1rem;
             color: #fff;
-            background-color: #007bff;
+            background-color: #3498db;
             border: none;
             border-radius: 5px;
             cursor: pointer;
-            transition: background-color 0.3s ease;
+            transition: background-color 0.3s ease, transform 0.2s ease;
         }
 
         button:hover {
-            background-color: #0056b3;
+            background-color: #2980b9;
+            transform: scale(1.05);
         }
 
         .conversation-box {
             width: 90%;
             max-width: 500px;
-            background: #fff;
+            background: #ffffff;
             border-radius: 10px;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-            padding: 15px;
-            margin-top: 20px; /* Add spacing above the conversation box */
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            margin-top: 20px;
             overflow-y: auto;
             max-height: 50vh;
         }
 
         h2 {
-            color: #333;
-            margin-bottom: 10px;
+            color: #2c3e50;
+            margin-bottom: 15px;
+            font-size: 1.5rem;
         }
 
         p {
-            margin: 5px 0;
+            margin: 8px 0;
             font-size: 1rem;
+            color: #34495e;
         }
 
         p strong {
-            color: #007bff;
+            color: #3498db;
+        }
+
+        .ai-response {
+            white-space: pre-wrap;
+            font-size: 1rem;
+            color: #2c3e50;
+            margin-top: 10px;
+            background-color: #f9f9f9;
+            padding: 10px;
+            border-radius: 5px;
+            border: 1px solid #ecf0f1;
         }
 
         @media (max-width: 600px) {
             h1 {
-                font-size: 1.5rem;
+                font-size: 1.8rem;
             }
 
             input[type="text"], button {
@@ -111,8 +132,9 @@
 
 <div class="conversation-box">
     <h2>Conversation</h2>
-    <p><strong>You:</strong> <span th:text="${userInput}"></span></p>
-    <p><strong>AI:</strong> <span th:text="${aiResponse}"></span></p>
+    <p><strong>You:</strong> <span th:utext="${userInput}"></span></p>
+    <p><strong>AI:</strong></p>
+    <div class="ai-response" th:utext="${aiResponse}"></div>
 </div>
 </body>
 </html>
