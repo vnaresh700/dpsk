@@ -11,31 +11,32 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-            justify-content: center;
+            justify-content: flex-start;
             min-height: 100vh;
             background-color: #f4f4f9;
         }
 
         h1 {
             color: #333;
-        }
-
-        form {
-            width: 90%;
-            max-width: 500px;
-            margin-bottom: 20px;
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
+            margin: 20px 0 10px; /* Add spacing below the heading */
         }
 
         label {
             font-size: 1rem;
             color: #555;
+            margin-bottom: 10px; /* Add spacing below the label */
+        }
+
+        form {
+            width: 90%;
+            max-width: 500px;
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
         }
 
         input[type="text"] {
-            width: 100%;
+            flex: 1;
             padding: 10px;
             font-size: 1rem;
             border: 1px solid #ccc;
@@ -44,7 +45,7 @@
         }
 
         button {
-            padding: 10px;
+            padding: 10px 15px;
             font-size: 1rem;
             color: #fff;
             background-color: #007bff;
@@ -58,13 +59,16 @@
             background-color: #0056b3;
         }
 
-        div {
+        .conversation-box {
             width: 90%;
             max-width: 500px;
             background: #fff;
             border-radius: 10px;
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
             padding: 15px;
+            margin-top: 20px; /* Add spacing above the conversation box */
+            overflow-y: auto;
+            max-height: 50vh;
         }
 
         h2 {
@@ -98,13 +102,14 @@
 </head>
 <body>
 <h1>ChatBot</h1>
+<label for="userInput">What can I help with?</label>
+
 <form action="/ask" method="post">
-    <label for="userInput">What can I help you with?</label>
-    <input type="text" id="userInput" name="userInput" required>
+    <input type="text" id="userInput" name="userInput" placeholder="Ask anything" required>
     <button type="submit">Send</button>
 </form>
 
-<div>
+<div class="conversation-box">
     <h2>Conversation</h2>
     <p><strong>You:</strong> <span th:text="${userInput}"></span></p>
     <p><strong>AI:</strong> <span th:text="${aiResponse}"></span></p>
