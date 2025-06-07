@@ -3,9 +3,10 @@
 <head>
     <title>ChatBot</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
     <style>
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: 'Roboto', sans-serif;
             margin: 0;
             padding: 0;
             display: flex;
@@ -13,76 +14,41 @@
             align-items: center;
             justify-content: flex-start;
             min-height: 100vh;
-            background-color: #eef2f7;
+            background: linear-gradient(135deg, #74ebd5, #acb6e5);
+            color: #2c3e50;
+            position: relative;
+        }
+
+        img.logo {
+            max-width: 150px;
+            margin: 20px 0;
         }
 
         h1 {
-            color: #2c3e50;
-            margin: 20px 0 10px;
-            font-size: 2rem;
-        }
-
-        label {
-            font-size: 1rem;
-            color: #34495e;
-            margin-bottom: 10px;
-        }
-
-        form {
-            width: 90%;
-            max-width: 500px;
-            display: flex;
-            gap: 10px;
-            margin-bottom: 20px;
-        }
-
-        input[type="text"] {
-            flex: 1;
-            padding: 12px;
-            font-size: 1rem;
-            border: 1px solid #bdc3c7;
-            border-radius: 5px;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-            transition: border-color 0.3s ease;
-        }
-
-        input[type="text"]:focus {
-            border-color: #3498db;
-            outline: none;
-        }
-
-        button {
-            padding: 12px 20px;
-            font-size: 1rem;
-            color: #fff;
-            background-color: #3498db;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            transition: background-color 0.3s ease, transform 0.2s ease;
-        }
-
-        button:hover {
-            background-color: #2980b9;
-            transform: scale(1.05);
+            margin: 10px 0;
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: #ffffff;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
         }
 
         .conversation-box {
             width: 90%;
             max-width: 500px;
             background: #ffffff;
-            border-radius: 10px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            border-radius: 15px;
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
             padding: 20px;
             margin-top: 20px;
             overflow-y: auto;
-            max-height: 50vh;
+            max-height: calc(100vh - 150px);
         }
 
         h2 {
-            color: #2c3e50;
             margin-bottom: 15px;
-            font-size: 1.5rem;
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: #2c3e50;
         }
 
         p {
@@ -101,14 +67,59 @@
             color: #2c3e50;
             margin-top: 10px;
             background-color: #f9f9f9;
-            padding: 10px;
-            border-radius: 5px;
+            padding: 15px;
+            border-radius: 10px;
             border: 1px solid #ecf0f1;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        form {
+            width: 90%;
+            max-width: 500px;
+            display: flex;
+            gap: 10px;
+            position: absolute;
+            bottom: 20px;
+        }
+
+        input[type="text"] {
+            flex: 1;
+            padding: 12px;
+            font-size: 1rem;
+            border: 1px solid #bdc3c7;
+            border-radius: 25px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        input[type="text"]:focus {
+            border-color: #3498db;
+            outline: none;
+            box-shadow: 0 4px 8px rgba(52, 152, 219, 0.3);
+        }
+
+        button {
+            padding: 12px 20px;
+            font-size: 1rem;
+            font-weight: 500;
+            color: #ffffff;
+            background: linear-gradient(135deg, #3498db, #2980b9);
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        button:hover {
+            background: linear-gradient(135deg, #2980b9, #1f618d);
+            transform: scale(1.05);
+            box-shadow: 0 6px 10px rgba(0, 0, 0, 0.2);
         }
 
         @media (max-width: 600px) {
             h1 {
-                font-size: 1.8rem;
+                font-size: 2rem;
             }
 
             input[type="text"], button {
@@ -122,13 +133,8 @@
     </style>
 </head>
 <body>
+<img src="/logo.png" alt="ChatBot Logo" class="logo">
 <h1>ChatBot</h1>
-<label for="userInput">What can I help with?</label>
-
-<form action="/ask" method="post">
-    <input type="text" id="userInput" name="userInput" placeholder="Ask anything" required>
-    <button type="submit">Send</button>
-</form>
 
 <div class="conversation-box">
     <h2>Conversation</h2>
@@ -136,5 +142,10 @@
     <p><strong>AI:</strong></p>
     <div class="ai-response" th:utext="${aiResponse}"></div>
 </div>
+
+<form action="/ask" method="post">
+    <input type="text" id="userInput" name="userInput" placeholder="Ask anything" required>
+    <button type="submit">Send</button>
+</form>
 </body>
 </html>
